@@ -69,7 +69,18 @@ so we render first, then we reload the app a second time.
 Initial render on server, then client side breathes life on browser. -- react will crawl over it and add life cycle
 
 
+## React Router
+Express Route Handler
+- delegates routing to react-router
+- GET /users => * => /users (react-router)
 
+### Quick overview of react router
+request to express server -> shows index.html
+BrowserRouter Component looks at url in address bar renders some route. This wont work on server
+
+2 routers in app
+static router for server
+browserRouter for client
 
 
 
