@@ -1,8 +1,9 @@
 import axios from 'axios';
-// https://react-ssr-api.herokuapp.com/
+const tutorialApi = 'https://react-ssr-api.herokuapp.com';
+
 export const FETCH_USERS = 'fetch_users';
 export const fetchUsers = () => async dispatch => {
-  const res = await axios.get('https://react-ssr-api.herokuapp.com/users');
+  const res = await axios.get(`${tutorialApi}/users`);
   dispatch({
     type: FETCH_USERS,
     payload: res
