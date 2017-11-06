@@ -82,5 +82,16 @@ BrowserRouter Component looks at url in address bar renders some route. This won
 static router for server
 browserRouter for client
 
+## Redux autentication
+4 challenges
+1. Redux needs different configuration on browser vs server
+  - precedent of 2 diff server/client configuration
+2. aspects of authentication needs to be handled on server
+  - server from action creator, we need to know instance action is finished
+3. need some way to detect when all initial data load action creators are completed on server
+  - biggest challenge. Redux / React to fix this
+4. need state rehydration on browser
+
+
 
 
