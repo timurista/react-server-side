@@ -1,3 +1,4 @@
+import 'babel-polyfill'; // polyfill help function for async await syntax
 import express  from 'express';
 import renderer from './helpers/renderer';
 import createStore from './helpers/createStore';
