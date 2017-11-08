@@ -14,10 +14,14 @@ app.use(express.static('public'));
 app.get('*', (req,res) => {
   const store = createStore();
 
-  matchRoutes(routes, req.path).map(({route}) => {
-    return route.loadData ? route.loadData() : null;
+  // make request, wait for it
+  // then do something with data
+  const promises = matchRoutes(routes, req.path).map(({route}) => {
+    return route.loadData ? route.loadData(store) : null;
   });
-  res.send(renderer(req, store));
+  Promise.all(promises).then(() => {
+    res.send(renderer(req, store));
+  });
 })
 
 app.listen(3000, () => console.log('port on localhost 3000'));
