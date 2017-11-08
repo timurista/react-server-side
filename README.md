@@ -114,6 +114,12 @@ PROS / CONS. Pros not alot of new code written.
   requires a ton of extra code. Clutch right now
 
 
+## Rehydration
+Redux fetches data, new store with bunch of state in it
+so state is sent to client whatsoever
+  client side store is made from complete scratch
+  it is empty until we complete the fetch action
+  We want to preserve state we have prefetched
 
 
 
