@@ -6,12 +6,11 @@ import routes from './client/Routes';
 import renderer from './helpers/renderer';
 import createStore from './helpers/createStore';
 
-
 const app = express();
 
-app.user('/api', proxy('http://react-ssr-api.herokuapp.com', {
+app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
   proxyReqOptDecorator(opts) {
-    opts.header['x-forwarded-host'] = 'localhost:3000'; // oauth google process
+    opts.headers['x-forwarded-host'] = 'localhost:3000'; // oauth google process
     return opts;
   }
 }))
@@ -20,7 +19,7 @@ app.use(express.static('public'));
 
 // * to watch for any route, will just pass to renderer
 app.get('*', (req,res) => {
-  const store = createStore();
+  const store = createStore(req);
 
   // make request, wait for it
   // then do something with data
