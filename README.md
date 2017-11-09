@@ -121,6 +121,11 @@ so state is sent to client whatsoever
   it is empty until we complete the fetch action
   We want to preserve state we have prefetched
 
-
+## Proxy and authorization
+  Step 1, write proxy
+  Any action creators need to be send to api
+    and same action creators on browser are sent to server and then api server
+  
+  
 
 
