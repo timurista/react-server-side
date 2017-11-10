@@ -132,7 +132,7 @@ var fetchCurrentUser = exports.fetchCurrentUser = function fetchCurrentUser() {
               res = _context2.sent;
 
               dispatch({
-                type: FETCH_USERS,
+                type: FETCH_CURRENT_USER,
                 payload: res
               });
 
@@ -158,6 +158,12 @@ module.exports = require("react-router-config");
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -197,16 +203,10 @@ exports.default = [_extends({}, _App2.default, {
 })];
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom");
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-redux");
+module.exports = require("react-router-dom");
 
 /***/ }),
 /* 6 */
@@ -233,7 +233,7 @@ var _expressHttpProxy = __webpack_require__(10);
 
 var _expressHttpProxy2 = _interopRequireDefault(_expressHttpProxy);
 
-var _Routes = __webpack_require__(3);
+var _Routes = __webpack_require__(4);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
@@ -356,13 +356,24 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouterDom = __webpack_require__(4);
+var _reactRouterDom = __webpack_require__(5);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Header = function Header() {
+var Header = function Header(_ref) {
+  var auth = _ref.auth;
+
+  var authButton = auth ? _react2.default.createElement(
+    'a',
+    { href: '/api/logout' },
+    'Logout'
+  ) : _react2.default.createElement(
+    'a',
+    { href: '/api/auth/google' },
+    'Login'
+  );
   return _react2.default.createElement(
     'div',
     null,
@@ -370,12 +381,27 @@ var Header = function Header() {
       _reactRouterDom.Link,
       { to: '/' },
       'React SSR'
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/users' },
+        'Users'
+      ),
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/admins' },
+        'Admins'
+      ),
+      authButton
     )
   );
 };
 
-function mapStateToProps(_ref) {
-  var auth = _ref.auth;
+function mapStateToProps(_ref2) {
+  var auth = _ref2.auth;
 
   return { auth: auth };
 }
@@ -439,7 +465,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(3);
 
 var _actions = __webpack_require__(1);
 
@@ -525,9 +551,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _server = __webpack_require__(16);
 
-var _reactRouterDom = __webpack_require__(4);
+var _reactRouterDom = __webpack_require__(5);
 
-var _reactRedux = __webpack_require__(5);
+var _reactRedux = __webpack_require__(3);
 
 var _reactRouterConfig = __webpack_require__(2);
 
@@ -535,7 +561,7 @@ var _serializeJavascript = __webpack_require__(17);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _Routes = __webpack_require__(3);
+var _Routes = __webpack_require__(4);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
@@ -690,7 +716,7 @@ Object.defineProperty(exports, "__esModule", {
 var _actions = __webpack_require__(1);
 
 exports.default = function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
   var action = arguments[1];
 
   switch (action.type) {
