@@ -126,6 +126,16 @@ so state is sent to client whatsoever
   Any action creators need to be send to api
     and same action creators on browser are sent to server and then api server
   
+## Render to Node Strem
+  it's like render to stream, but it returns a readable stream
+  tiny packages of data, then send to users browser
+  TTFB is really fast with node stream, and content downloaded is very slow
+    GOTCHA
+      you call renderer and you also pass in response object
+      and immediately start sending back
+
+    we can change status page
+      redirects won't show 404 stauts code
   
 
 
