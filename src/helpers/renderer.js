@@ -8,10 +8,10 @@ import routes from '../client/Routes';
 
 // need to pass empty context to StaticRouter
 // handle redirects and error handling
-export default (req, store) => {
+export default (req, store, context) => {
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.path} context={{}}>
+      <StaticRouter location={req.path} context={context}>
         <div>{renderRoutes(routes)}</div>
       </StaticRouter>
     </Provider>
