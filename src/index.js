@@ -25,11 +25,25 @@ app.get('*', (req,res) => {
   // then do something with data
   const promises = matchRoutes(routes, req.path).map(({route}) => {
     return route.loadData ? route.loadData(store) : null;
+  }).map( promise => {
+    if (promise) {
+      // makes an always resolve promise
+      return new Promise((resolve, reject) => {
+        promise.then(resolve).catch(resolve);
+      })
+    }
   });
+
+  // to handle errors we really should try to give user option to fix
+  // dont use catch and abandon rendering attempt
+  // we need to allow other requests to be completed
   Promise.all(promises).then(() => {
     const context = {}; // so we can handle 404 errors
     const content = renderer(req, store, context);
 
+    if (context.url) {
+      return res.redirect(301, context.url);
+    }
     if (context.notFound) {
       res.status(404);
     }
